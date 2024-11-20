@@ -16,7 +16,7 @@ interface WeatherApiService {
     @GET("forecast/daily")
     suspend fun getForecast(
         @Query("city") city: String,
-        @Query("days") days: Int = 5,
+        @Query("days") days: Int = 7,
         @Query("key") apiKey: String = BuildConfig.API_KEY,
         @Query("lang") lang: String = "es"
     ): Response<ForecastResponse>

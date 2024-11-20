@@ -39,5 +39,5 @@
         android:layout_gravity="center_horizontal"
         android:textSize="18sp"
         android:layout_marginTop="25dp"
-        android:text="Pronóstico de 5 días"/>
+        android:text="Pronóstico de 7 días"/>
 </LinearLayout>
