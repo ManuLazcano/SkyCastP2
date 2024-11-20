@@ -5,12 +5,16 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.skycastp2.data.CurrentWeatherResponse
+import com.example.skycastp2.database.CityRepository
+import com.example.skycastp2.database.CityViewModel
+import com.example.skycastp2.database.DatabaseInstance
 import com.example.skycastp2.databinding.ActivityMainBinding
 import com.example.skycastp2.viewModel.WeatherViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val weatherViewModel: WeatherViewModel by viewModels()
+    private lateinit var cityViewModel: CityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,8 +22,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        // Llamar a la API para obtener el clima actual
-        weatherViewModel.fetchCurrentWeather("Buenos Aires")
+        // Obtener el Dao y Repository para Room
+        val cityDao = DatabaseInstance.getDatabase(applicationContext).cityDao()
+        val repository = CityRepository(cityDao)
+        cityViewModel = CityViewModel(repository)
+
+        // Obtener la ciudad guardada en la base de datos
+        cityViewModel.getCity()
+
+        // Observar los cambios de la ciudad
+        cityViewModel.city.observe(this) { city ->
+            val cityName = city?.name ?: "Ushuaia"
+
+            weatherViewModel.fetchCurrentWeather(cityName)
+        }
+
 
         weatherViewModel.currentWeather.observe(this) { weatherResponse ->
             weatherResponse?.let {
