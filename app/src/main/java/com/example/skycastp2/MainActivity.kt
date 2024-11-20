@@ -1,12 +1,9 @@
 package com.example.skycastp2
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import com.example.skycastp2.data.CurrentWeatherResponse
 import com.example.skycastp2.databinding.ActivityMainBinding
 import com.example.skycastp2.viewModel.WeatherViewModel
@@ -29,6 +26,11 @@ class MainActivity : AppCompatActivity() {
                 updateUI(it)
             }
         }
+
+        binding.btnForecast.setOnClickListener {
+            startActivity(Intent(this, ForecastActivity::class.java))
+        }
+
     }
 
     private fun updateUI(weather: CurrentWeatherResponse) {
