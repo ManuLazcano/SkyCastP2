@@ -11,6 +11,7 @@ import com.example.skycastp2.database.CityViewModel
 import com.example.skycastp2.database.DatabaseInstance
 import com.example.skycastp2.databinding.ActivityMainBinding
 import com.example.skycastp2.databinding.DialogLocationBinding
+import com.example.skycastp2.fragment.ContactFormFragment
 import com.example.skycastp2.viewModel.WeatherViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -57,6 +58,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnForecast.setOnClickListener {
             startActivity(Intent(this, ForecastActivity::class.java))
+        }
+
+        binding.btnOpenContactForm.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, ContactFormFragment())
+                .addToBackStack(null) // Permite volver atrás
+                .commit()
         }
 
     }
