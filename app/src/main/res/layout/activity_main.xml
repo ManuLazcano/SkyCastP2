@@ -40,4 +40,14 @@
         android:textSize="18sp"
         android:layout_marginTop="25dp"
         android:text="Pronóstico de 7 días"/>
+
+    <Button
+        android:id="@+id/btn_alertDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="18sp"
+        android:layout_marginTop="25dp"
+        android:text="Elegir ciudad"/>
+
 </LinearLayout>
