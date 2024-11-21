@@ -14,6 +14,7 @@ class CityViewModel(private val repository: CityRepository) : ViewModel() {
 
     fun insertCity(cityName: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            repository.clearCities()
             repository.insertCity(City(cityName))
         }
     }
@@ -21,12 +22,6 @@ class CityViewModel(private val repository: CityRepository) : ViewModel() {
     fun getCity() {
         viewModelScope.launch(Dispatchers.IO) {
             _city.postValue(repository.getCity())
-        }
-    }
-
-    fun clearCities() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.clearCities()
         }
     }
 
